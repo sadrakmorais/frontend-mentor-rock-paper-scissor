@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import * as S from "./Game.styles";
 import { ScoreContext } from "@/contexts/score";
 import { ChoicesButtons } from "../ChoicesButtons/ChoicesButtons";
+import { Battle } from "../Battle/Battle";
 
 export type Choices = "paper" | "rock" | "scissors" | null;
 export function Game() {
@@ -28,22 +29,15 @@ export function Game() {
 
   return (
     <S.Wrapper>
-      <ChoicesButtons
-        changePicked={setChoosePlayer}
-        changePickedHome={setChooseHome}
-        changeWinner={setWinner}
-      />
-      {chooseHome && choosePlayer && (
-        <>
-          <div>
-            <span>YOU PICKED</span>
-            <h1>{choosePlayer}</h1>
-          </div>
-          <div>
-            <span>THE HOUSE PICKED</span>
-            <h1>{chooseHome}</h1>
-          </div>
-        </>
+      {!choosePlayer && (
+        <ChoicesButtons
+          changePicked={setChoosePlayer}
+          changePickedHome={setChooseHome}
+          changeWinner={setWinner}
+        />
+      )}
+      {(chooseHome || choosePlayer) && (
+        <Battle pickPlayer={choosePlayer} pickHome={chooseHome} />
       )}
 
       {!!winner && (

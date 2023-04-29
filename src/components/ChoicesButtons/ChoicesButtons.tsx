@@ -1,6 +1,7 @@
 import Image from "next/image";
 import * as S from "./ChoicesButtons.styles";
 import { Choices } from "../Game/Game";
+import { Pick } from "../Pick/Pick";
 
 type ChoicesProps = {
   id: number;
@@ -8,7 +9,7 @@ type ChoicesProps = {
   name: Choices;
 };
 
-const choices: ChoicesProps[] = [
+export const choices: ChoicesProps[] = [
   {
     id: 1,
     icon: "/images/icon-rock.svg",
@@ -23,24 +24,6 @@ const choices: ChoicesProps[] = [
     id: 3,
     icon: "/images/icon-scissors.svg",
     name: "scissors",
-  },
-];
-
-const colorGradient = [
-  {
-    BG: "rgb(220,46,78)",
-    GR1: "rgba(220,46,78,1)",
-    GR2: "rgba(221,64,93,1)",
-  },
-  {
-    BG: "rgb(72,101,244)",
-    GR1: "rgba(72,101,244,1)",
-    GR2: "rgba(86,113,245,1)",
-  },
-  {
-    BG: "rgb(236,158,14)",
-    GR1: "rgba(236,158,14,1)",
-    GR2: "rgba(236,169,34,1)",
   },
 ];
 
@@ -90,23 +73,15 @@ export function ChoicesButtons({
   return (
     <S.Wrapper>
       {choices.map((choice) => (
-        <S.BordePick key={choice.id} colors={colorGradient[choice.id - 1]}>
-          <S.Pick
-            onClick={() => {
-              changePicked(choice.name);
-              handlePlay(choice.name);
-            }}
-          >
-            <Image
-              className="logo"
-              src={choice.icon}
-              alt="Next.js Logo"
-              width={50}
-              height={50}
-              priority
-            />
-          </S.Pick>
-        </S.BordePick>
+        <Pick
+          key={choice.id}
+          idPick={choice.id - 1}
+          pathImage={choice.icon}
+          handleAction={() => {
+            changePicked(choice.name);
+            handlePlay(choice.name);
+          }}
+        />
       ))}
     </S.Wrapper>
   );
