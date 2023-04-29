@@ -37,14 +37,13 @@ export function Game() {
         />
       )}
       {(chooseHome || choosePlayer) && (
-        <Battle pickPlayer={choosePlayer} pickHome={chooseHome} />
-      )}
-
-      {!!winner && (
-        <>
-          <div>{responseWinner[winner]}</div>
-          <button onClick={() => handleTryAgain()}>TRY AGAIN</button>
-        </>
+        <Battle
+          pickPlayer={choosePlayer}
+          pickHome={chooseHome}
+          handleTryAgain={handleTryAgain}
+          winner={winner}
+          winnerMessage={responseWinner[winner]}
+        />
       )}
     </S.Wrapper>
   );

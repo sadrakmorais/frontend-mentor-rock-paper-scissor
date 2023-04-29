@@ -67,7 +67,7 @@ export function ChoicesButtons({
       const homePick = randomChoice();
       setTimeout(() => {
         verifyWinner(choice, homePick);
-      }, 200);
+      }, 800);
     }, 1000);
   };
   return (

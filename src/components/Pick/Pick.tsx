@@ -1,9 +1,10 @@
 import Image from "next/image";
-import * as S from "../ChoicesButtons/ChoicesButtons.styles";
+import * as S from "./Pick.styles";
 type PickProps = {
   pathImage: string;
   handleAction?: () => void;
   idPick: number;
+  isWinner?: boolean;
 };
 
 const colorGradient = [
@@ -24,19 +25,19 @@ const colorGradient = [
   },
 ];
 
-export function Pick({ pathImage, idPick, handleAction }: PickProps) {
+export function Pick({ pathImage, idPick, handleAction, isWinner }: PickProps) {
   return (
-    <S.BordePick colors={colorGradient[idPick]}>
+    <S.BorderPick colors={colorGradient[idPick]} isWinner={isWinner}>
       <S.Pick onClick={handleAction}>
         <Image
           className="logo"
           src={pathImage}
           alt="Next.js Logo"
-          width={50}
-          height={50}
+          width={100}
+          height={100}
           priority
         />
       </S.Pick>
-    </S.BordePick>
+    </S.BorderPick>
   );
 }
