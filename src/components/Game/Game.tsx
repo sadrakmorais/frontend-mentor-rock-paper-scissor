@@ -1,28 +1,57 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as S from "./Game.styles";
+import { ScoreContext } from "@/contexts/score";
+import { ChoicesButtons } from "../ChoicesButtons/ChoicesButtons";
 
-type Choices = "paper" | "rock" | "scissor" | null;
+export type Choices = "paper" | "rock" | "scissors" | null;
 export function Game() {
   const [choosePlayer, setChoosePlayer] = useState<Choices>(null);
   const [chooseHome, setChooseHome] = useState<Choices>(null);
-  const [score, setScore] = useState(0);
+  const [winner, setWinner] = useState(0);
+  const { score, setScore } = useContext(ScoreContext);
 
-  function randomChoice() {
-    const choices: Choices[] = ["paper", "scissor", "rock"];
+  const responseWinner: { [key: number]: string } = {
+    1: "YOU WIN",
+    2: "YOU LOSE",
+    3: "DRAW",
+  };
 
-    const randomNumber = Math.floor(Math.random() * 3);
-
-    return choices[randomNumber];
-  }
+  const handleTryAgain = () => {
+    setChooseHome(null);
+    setChoosePlayer(null);
+    setWinner(0);
+  };
 
   useEffect(() => {
-    if (choosePlayer !== null) setChooseHome(randomChoice());
-  }, [choosePlayer]);
+    if (winner === 1) setScore(score + 1);
+  }, [winner]);
+
   return (
     <S.Wrapper>
-      <button onClick={() => setChoosePlayer("rock")}>pedra</button>
-      <button onClick={() => setChoosePlayer("paper")}>papel</button>
-      <button onClick={() => setChoosePlayer("scissor")}>tesoura</button>
+      <ChoicesButtons
+        changePicked={setChoosePlayer}
+        changePickedHome={setChooseHome}
+        changeWinner={setWinner}
+      />
+      {chooseHome && choosePlayer && (
+        <>
+          <div>
+            <span>YOU PICKED</span>
+            <h1>{choosePlayer}</h1>
+          </div>
+          <div>
+            <span>THE HOUSE PICKED</span>
+            <h1>{chooseHome}</h1>
+          </div>
+        </>
+      )}
+
+      {!!winner && (
+        <>
+          <div>{responseWinner[winner]}</div>
+          <button onClick={() => handleTryAgain()}>TRY AGAIN</button>
+        </>
+      )}
     </S.Wrapper>
   );
 }
