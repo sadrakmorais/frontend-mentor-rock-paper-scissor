@@ -72,17 +72,37 @@ export function ChoicesButtons({
   };
   return (
     <S.Wrapper>
-      {choices.map((choice) => (
+      <section className="section-1">
         <Pick
-          key={choice.id}
-          idPick={choice.id - 1}
-          pathImage={choice.icon}
+          key={choices[0].id}
+          idPick={choices[0].id - 1}
+          pathImage={choices[0].icon}
           handleAction={() => {
-            changePicked(choice.name);
-            handlePlay(choice.name);
+            changePicked(choices[0].name);
+            handlePlay(choices[0].name);
           }}
         />
-      ))}
+        <Pick
+          key={choices[1].id}
+          idPick={choices[1].id - 1}
+          pathImage={choices[1].icon}
+          handleAction={() => {
+            changePicked(choices[1].name);
+            handlePlay(choices[1].name);
+          }}
+        />
+      </section>
+      <section>
+        <Pick
+          key={choices[2].id}
+          idPick={choices[2].id - 1}
+          pathImage={choices[2].icon}
+          handleAction={() => {
+            changePicked(choices[2].name);
+            handlePlay(choices[2].name);
+          }}
+        />
+      </section>
     </S.Wrapper>
   );
 }

@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 2rem;
 `;
 
 export const SlotPick = styled.div`

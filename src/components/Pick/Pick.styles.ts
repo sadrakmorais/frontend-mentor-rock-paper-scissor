@@ -13,6 +13,7 @@ export const BorderPick = styled.div<BorderPickProps>`
   ${({ colors, isWinner }) => css`
   display: flex;
   justify-content: center;
+  max-width: 170px;
   align-items: center;
   padding: 0.8rem;
   background: ${colors.BG};

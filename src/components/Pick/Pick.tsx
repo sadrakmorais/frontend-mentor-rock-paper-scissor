@@ -33,8 +33,8 @@ export function Pick({ pathImage, idPick, handleAction, isWinner }: PickProps) {
           className="logo"
           src={pathImage}
           alt="Next.js Logo"
-          width={100}
-          height={100}
+          width={120}
+          height={120}
           priority
         />
       </S.Pick>
